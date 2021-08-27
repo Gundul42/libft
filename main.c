@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 13:19:07 by graja             #+#    #+#             */
-/*   Updated: 2021/08/27 13:54:35 by graja            ###   ########.fr       */
+/*   Created: 2021/06/13 16:50:00 by graja             #+#    #+#             */
+/*   Updated: 2021/06/18 18:02:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-t_list	*ft_lstnew(void *content)
+int	main(void)
 {
-	t_list	*head;
+	char	**str;
+	char	test[] = "Guten morgen, bitte %d Euro ueberweisen zu 100%% und %s";
+	char	*src;
+	int		i;
 
-	head = malloc(sizeof(t_list));
-	if (head == NULL)
-		return (NULL);
-	head->content = content;
-	(*head).next = NULL;
-	return (head);
+	i = 0;
+	src = &test[0];
+	str = ft_split(src, '%');
+	while (str[i])
+	{
+		printf("%s\n", str[i]);
+		free(str[i]);
+		i++;
+	}
+	free(str[i]);
+	free(str);
+	return (0);
 }

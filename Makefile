@@ -6,7 +6,7 @@
 #    By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 13:21:37 by graja             #+#    #+#              #
-#    Updated: 2021/05/24 13:22:18 by graja            ###   ########.fr        #
+#    Updated: 2021/08/27 12:02:14 by graja            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,21 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c f
 BONUSSRC = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 	 ft_lstclear.c ft_lstiter.c *ft_lstmap.c
 
+OBJS		= $(SRCS:.c=.o)
+
+BOBJS		= $(BONUSSRC:.c=.o)
+
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME):
 	gcc $(FLAGS) -c $(SRCS)
-	ar rc $(NAME) *.o
+	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 clean:
-	rm -f *.o
+	rm -f $(OBJS) $(BOBJS)
 
 fclean: clean
 	rm -f $(NAME)
@@ -38,8 +42,8 @@ fclean: clean
 re: fclean all
 
 bonus:
-	rm -f *.o
+	rm -f $(OBJS) $(BOBJS)
 	rm -f $(NAME)
 	gcc $(FLAGS) -c $(SRCS) $(BONUSSRC)
-	ar rc $(NAME) *.o
+	ar rc $(NAME) $(OBJS) $(BOBJS)
 	ranlib $(NAME)
